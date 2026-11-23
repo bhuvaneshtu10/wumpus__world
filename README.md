@@ -1,6 +1,6 @@
 <h1>ExpNo 9: Solve Wumpus World Problem using Python demonstrating Inferences from Propositional Logic</h1> 
-<h3>Name:                       </h3>
-<h3>Register Number/Staff Id:                </h3>
+<h3>Name: Bhuvaneshwaran TU                      </h3>
+<h3>Register Number/Staff Id:  212224040049         </h3>
 <H3>Aim:</H3>
 <p>
     To solve  Wumpus World Problem using Python demonstrating Inferences from Propositional Logic
@@ -28,4 +28,180 @@ It is assumed that there will always be a safe path that the agent can take to e
 
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8696111a-a4a7-47cb-ba4b-43a4ef88573f)
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/4be5bf06-79fa-4fa0-9334-38a33f06060b)
+
+<h2>Program : </h2>
+
+```
+
+# WUMPUS WORLD
+
+wumpus = [
+    ["Save", "Breeze", "PIT", "Breeze"],
+    ["Smell", "Save", "Breeze", "Save"],
+    ["WUMPUS", "GOLD", "PIT", "Breeze"],
+    ["Smell", "Save", "Breeze", "PIT"]
+]
+
+# Initial Variables
+row = 0
+column = 0
+arrow = True
+player = True
+score = 0
+
+print("WELCOME TO WUMPUS WORLD")
+print("Starting position:", row, column)
+print("Current location:", wumpus[row][column])
+
+while player:
+
+    choice = input(
+        "\nPress u to move up"
+        "\nPress d to move down"
+        "\nPress l to move left"
+        "\nPress r to move right"
+        "\nEnter your choice: "
+    ).lower()
+
+    # Player Movement
+    if choice == "u":
+        if row != 0:
+            row -= 1
+        else:
+            print("Move denied")
+
+    elif choice == "d":
+        if row != 3:
+            row += 1
+        else:
+            print("Move denied")
+
+    elif choice == "l":
+        if column != 0:
+            column -= 1
+        else:
+            print("Move denied")
+
+    elif choice == "r":
+        if column != 3:
+            column += 1
+        else:
+            print("Move denied")
+
+    else:
+        print("Invalid choice")
+        continue
+
+    print("Current location:", wumpus[row][column])
+
+    # Throwing Arrow
+    if wumpus[row][column] == "Smell" and arrow:
+
+        arrow_choice = input(
+            "Do you want to throw an arrow?\n"
+            "Press y to throw\n"
+            "Press n to save your arrow\n"
+        ).lower()
+
+        if arrow_choice == "y":
+
+            arrow_throw = input(
+                "Press u to throw up\n"
+                "Press d to throw down\n"
+                "Press l to throw left\n"
+                "Press r to throw right\n"
+            ).lower()
+
+            # Calculate target position
+            target_row = row
+            target_column = column
+
+            if arrow_throw == "u":
+                target_row -= 1
+            elif arrow_throw == "d":
+                target_row += 1
+            elif arrow_throw == "l":
+                target_column -= 1
+            elif arrow_throw == "r":
+                target_column += 1
+            else:
+                print("Invalid direction")
+
+            # Check arrow target
+            if arrow_throw in ["u", "d", "l", "r"]:
+
+                if (0 <= target_row < 4 and
+                    0 <= target_column < 4):
+
+                    if wumpus[target_row][target_column] == "WUMPUS":
+
+                        print("Wumpus killed!")
+                        score += 1000
+
+                        wumpus[target_row][target_column] = "Save"
+                        wumpus[1][0] = "Save"
+                        wumpus[3][0] = "Save"
+
+                    else:
+                        print("Arrow wasted...")
+                        score -= 10
+
+                else:
+                    print("Arrow went outside the world!")
+                    score -= 10
+
+                arrow = False
+
+                print("Score:", score)
+
+    # Check Wumpus
+    if wumpus[row][column] == "WUMPUS":
+
+        score -= 1000
+        print("\nWumpus here!!")
+        print("You Die")
+        print("Your score is:", score)
+        break
+
+    # Check Gold
+    if wumpus[row][column] == "GOLD":
+
+        score += 1000
+        print("\nCongratulations!")
+        print("You found the GOLD!")
+        print("You Win!")
+        print("Your score is:", score)
+        break
+
+    # Check Pit
+    if wumpus[row][column] == "PIT":
+
+        score -= 1000
+        print("\nAhhhhh!!!!")
+        print("You fell in pit.")
+        print("Your score is:", score)
+        break
+
+    print("Current Score:", score)
+
+print("\nGAME OVER")
+
+```
+
+<h2>Output : </h2>
+
+<img width="1411" height="745" alt="Screenshot 2026-11-23 134411" src="https://github.com/user-attachments/assets/94d7021b-8ec6-4ffd-936e-a9e4be500de5" />
+
+
+
+
+
+<h2>Result : </h2>
+
+Therefore, Wumpus World Problem using Python demonstrating Inferences from Propositional Logic solved successfully.
+
+
+
+
+
 
